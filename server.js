@@ -18,6 +18,8 @@ server.on('connection', function (sock) {
             sock.write(sock.remoteAddress + ':' + sock.remotePort + " said " + data + '\n');
         })
     })
+
+
     // Add a 'close' event handler to this instance of socket
     sock.on('close', function (data) {
         let index = sockets.findIndex(function (o) {
@@ -27,4 +29,5 @@ server.on('connection', function (sock) {
         console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
     });
 })
+
 

@@ -3,7 +3,7 @@ const port = 7070
 const host = '127.0.0.1'
 
 const server = net.createServer()
-server.listen(port, host, () => {
+server.listen(port, () => {
     console.log('TCP Server is running on port ' + port + '.')
 })
 

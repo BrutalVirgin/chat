@@ -22,6 +22,13 @@
                 "AWS_REGION": "us-east-1",
                 "NODE_ENV": "local"
             }
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Run TS File",
+            "program": "${file}",
+            "runtimeExecutable": "nodemon",
         }
     ]
 }

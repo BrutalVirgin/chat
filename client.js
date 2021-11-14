@@ -5,7 +5,7 @@ const { Socket } = require('dgram')
 
 const client = new net.Socket()
 const port = 7070
-const host = '172.16.26.69'
+const host = '127.0.0.1'
 
 const rl = readLine.createInterface({
     input: process.stdin,
@@ -14,56 +14,29 @@ const rl = readLine.createInterface({
 
 let nickname = null
 
-rl.write("SOSI HUI")
-
-rl.question("What is your nickname? ", (answer) => {
-    nickname = answer
-    console.log("asdlkljskjsdkslkf")
-    rl.question("", (msg) => {
-        client.emit("data", msg)
+client.connect(port, host, function () {
+    console.log('Connected')
+    rl.question("What is your nickname? ", (answer) => {
+        nickname = answer
+        rl.question("", (msg) => {
+            client.emit("data", msg)
+        })
     })
+    client.write("asdasdasd asdasdasd ")
 })
 
-// client.connect(port, host, function () {
-//     console.log('Connected')
+client.on('data', function (data) {
+    console.log('Server: ' + data)
+})
 
-//     rl.question("What is your nickname? ", (answer) => {
-//         nickname = answer
-//         rl.question("", (msg) => {
-//             client.emit("data", msg)
-//         })
-//     })
+client.on("end", function () {
+    console.log("cleint left chat")
+})
 
-//     client.write("Hello From Client 2");
-//     process.stdin.on('data', function (data) {
-//         client.write(data)
-//     })
-// })
+client.on('close', function () {
+    console.log('Connection closed')
+})
 
-// client.on('data', function (data) {
-//     // setName(data)
-//     console.log('Server: ' + data)
-// })
-
-// client.on("end", function () {
-//     console.log("cleint left chat")
-// })
-
-// client.on('close', function () {
-//     console.log('Connection closed')
-// })
-
-// function setName(sock) {
-//     console.log("Enter your nickname:")
-//     process.stdin.on('data', function (data) {
-//         return sock.name = data
-//     })
-// }
-
-
-// client.on("on", (data) => {
-//     console.log("dataasdasdasdasdasdasdasdasd: " + data)
-//     client.end(
-
-//     )
-// })
+client.on("on", (data) => {
+    console.log("dataasdasdasdasdasdasdasdasd: " + data)
+})

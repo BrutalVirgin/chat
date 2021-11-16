@@ -1,20 +1,19 @@
 const net = require('net')
+const readLine = require("readline")
 const port = 7070
 const host = '127.0.0.1'
 
+// имя пользователя
+// время отправки сообщения
+// количество подсключенных пользователей
+// вывод сообщения о отключенном пользователе
 
-
-const server = net.createServer()
-server.listen(port, host, () => {
-    console.log('TCP Server is running on port ' + port + '.')
+const rl = readLine.createInterface({
+    input: process.stdin,
+    output: process.stdout
 })
 
 class Server {
-
-    connectedClient = {
-        "name": socket
-    }
-
     constructor(opts = {}) {
         this.socket = net.createServer()
 
@@ -22,46 +21,54 @@ class Server {
     }
 
     onConnect(socket) {
-        const userName = ""
 
-        // client with name connected
-
-        this.connectedClient = [...]
+        console.log("socket connected", socket)
+        socket.on("closed")
     }
+
 
     onDisconnect(socket) {
         // client with name disconnected
+    }
 
-        this.connectedClient = [...]
+    listen(port, host) {
+        this.socket.listen(port, host, () => {
+            console.log('TCP Server is running on port ' + port + '.')
+        })
+
     }
 }
+
+
 
 async function main() {
     const server = new Server({})
 
-    server.listen()
+    server.listen(port, host)
 }
 
-let sockets = []
-server.on('connection', function (sock) {
-    console.log('CONNECTED: 1')
+main()
 
-    console.log(sock.remoteAddress + ':' + sock.remotePort)
-    sockets.push(sock)
-    sock.on('data', function (data) {
-        console.log(sock.remotePort + ": " + data)
-        sockets.forEach(function (sock, index, array) {
-            sock.write(sock.remotePort + ": " + data);
-        })
-    })
+// let sockets = []
+// server.on('connection', function (sock) {
+//     console.log('CONNECTED: 1')
 
-    sock.on('close', function (data) {
-        let index = sockets.findIndex(function (o) {
-            return o.remoteAddress === sock.remoteAddress && o.remotePort === sock.remotePort;
-        })
-        if (index !== -1) sockets.splice(index, 1);
-        console.log('CLOSED: 1');
-    });
+//     console.log(sock.remoteAddress + ':' + sock.remotePort)
+//     sockets.push(sock)
+//     sock.on('data', function (data) {
+//         console.log(sock.remotePort + ": " + data)
+//         sockets.forEach(function (sock, index, array) {
+//             sock.write(sock.remotePort + ": " + data);
+//         })
+//     })
 
-})
+//     sock.on('close', function (data) {
+//         let index = sockets.findIndex(function (o) {
+//             return o.remoteAddress === sock.remoteAddress && o.remotePort === sock.remotePort;
+//         })
+//         if (index !== -1) sockets.splice(index, 1);
+//         console.log('CLOSED: 1');
+//     });
+
+// })
 

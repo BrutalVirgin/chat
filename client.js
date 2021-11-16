@@ -18,12 +18,12 @@ const rl = readLine.createInterface({
 
 client.connect(port, host, function () {
     console.log('Connected')
-    rl.question("What is your nickname? ", (answer) => {
-        nickname = answer
-        rl.question("", (msg) => {
-            client.emit("data", msg)
-        })
-    })
+    // rl.question("What is your nickname? ", (answer) => {
+    //     nickname = answer
+    //     rl.question("", (msg) => {
+    //         client.emit("data", msg)
+    //     })
+    // })
 
     rl.on("line", (l) => {
         client.write(l)

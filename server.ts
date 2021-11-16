@@ -2,6 +2,8 @@ import EventEmitter from 'events'
 import net from 'net'
 import readLine from "readline"
 
+console.log("ZALUPA")
+
 const port = 7070
 const host = '127.0.0.1'
 

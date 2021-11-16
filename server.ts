@@ -1,4 +1,4 @@
-import EventEmitter from 'events'
+//import EventEmitter from 'events'
 import net from 'net'
 import readLine from "readline"
 

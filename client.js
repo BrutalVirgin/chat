@@ -17,20 +17,16 @@ const rl = readLine.createInterface({
 
 
 client.connect(port, host, function () {
-    console.log('Connected')
-    // rl.question("What is your nickname? ", (answer) => {
-    //     nickname = answer
-    //     rl.question("", (msg) => {
-    //         client.emit("data", msg)
-    //     })
-    // })
+ 
 
-    rl.on("line", (l) => {
-        client.write(l)
-    })
 })
 
 client.on('data', function (data) {
+    if(data==="как тиебя зовут?") {
+        rl.question("как тиебя зовут?", (answer)=> {
+            client.write(answer)
+        })
+    }
     console.log('Server: ' + data)
 })
 

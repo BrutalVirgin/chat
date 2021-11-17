@@ -1,4 +1,5 @@
 //import EventEmitter from 'events'
+import EventEmitter from 'events'
 import net from 'net'
 import readLine from "readline"
 
@@ -17,13 +18,20 @@ const rl = readLine.createInterface({
     output: process.stdout
 })
 
-class Connection {
+class Connection extends EventEmitter {
     public name: string
     private socket: net.Socket
 
+
     constructor(name: string, socket: net.Socket) {
+        super()
         this.name = name
         this.socket = socket
+    }
+
+    askForNickname() {
+        this.socket.write("как тиебя зовут?")
+        this.emit("nicname")
     }
 
     sendMessage(msg: string) {
@@ -55,9 +63,9 @@ class Server {
 
         connection.sendMessage("Hello boi, wat iz ur name son")
         connection.sendMessage("DA POSHEL TI NAHUI PES")
+        connection.askForNickname()
 
-        connection.disconnect()
-
+        // connection.disconnect()
     }
 
     listen(port: number, host: string) {

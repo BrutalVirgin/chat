@@ -22,7 +22,6 @@ class Connection extends EventEmitter {
     public name: string
     private socket: net.Socket
 
-
     constructor(name: string, socket: net.Socket) {
         super()
         this.name = name
@@ -30,8 +29,10 @@ class Connection extends EventEmitter {
     }
 
     askForNickname() {
-        this.socket.write("как тиебя зовут?")
-        this.emit("nicname")
+        const eventEmt = new EventEmitter()
+        this.socket.write("nickname")
+        eventEmt.emit("nicname")
+
     }
 
     sendMessage(msg: string) {

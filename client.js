@@ -17,13 +17,13 @@ const rl = readLine.createInterface({
 
 
 client.connect(port, host, function () {
- 
+
 
 })
 
 client.on('data', function (data) {
-    if(data==="как тиебя зовут?") {
-        rl.question("как тиебя зовут?", (answer)=> {
+    if (data === "nickname") {
+        rl.question("what is your nicname?", (answer) => {
             client.write(answer)
         })
     }

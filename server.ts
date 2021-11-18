@@ -31,7 +31,12 @@ class Connection extends EventEmitter {
     askForNickname() {
         const eventEmt = new EventEmitter()
         this.socket.write("nickname")
-        eventEmt.emit("nicname")
+
+        eventEmt.on("nickname", (arg) => {
+            console.log(arg)
+        })
+
+        eventEmt.emit("nickname")
 
     }
 

@@ -23,7 +23,7 @@ client.connect(port, host, function () {
 
 client.on('data', function (data) {
     if (data === "nickname") {
-        rl.question("what is your nicname?", (answer) => {
+        rl.question("what is your nickname?", (answer) => {
             client.write(answer)
         })
     }

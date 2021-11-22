@@ -18,26 +18,38 @@ const rl = readLine.createInterface({
     output: process.stdout
 })
 
+enum MessageType {
+    AUTHORIZE = "AUTHORIZE"
+}
+
 class Connection extends EventEmitter {
     public name: string
     private socket: net.Socket
+
+
 
     constructor(name: string, socket: net.Socket) {
         super()
         this.name = name
         this.socket = socket
+
+        this.socket.on("data", (msg) => {
+            const [type, data] = this.parseMessage(msg)
+
+            if (type === MessageType.AUTHORIZE) {
+                this.emit("authorize", data)
+            } else {
+                this.emit("unexpected", msg)
+            }
+        })
+    }
+
+    parseMessage(b: Buffer): [MessageType, Record<string, string>] {
+        return [MessageType.AUTHORIZE, {}]
     }
 
     askForNickname() {
-        const eventEmt = new EventEmitter()
         this.socket.write("nickname")
-
-        eventEmt.on("nickname", (arg) => {
-            console.log(arg)
-        })
-
-        eventEmt.emit("nickname")
-
     }
 
     sendMessage(msg: string) {
@@ -65,11 +77,19 @@ class Server {
 
     private readonly onConnect = (socket: net.Socket) => {
         const connection = new Connection(String(Math.random()), socket)
+
         this.registry.push(connection)
 
-        connection.sendMessage("Hello boi, wat iz ur name son")
-        connection.sendMessage("DA POSHEL TI NAHUI PES")
+        console.log("connected")
+
         connection.askForNickname()
+
+        connection.on("authorize", (d) => {
+            console.log("authorize", d)
+        })
+        connection.on("unexpected", (d) => {
+            console.log("SHOTA TAM", d)
+        })
 
         // connection.disconnect()
     }

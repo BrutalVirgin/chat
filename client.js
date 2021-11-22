@@ -22,10 +22,13 @@ client.connect(port, host, function () {
 })
 
 client.on('data', function (data) {
-    if (data === "nickname") {
+    if (String(data) === "nickname") {
+        console.log("GONDURAS")
         rl.question("what is your nickname?", (answer) => {
-            client.write(answer)
+            const msg = `AUTHORIZE#${answer}`
+            client.write(msg)
         })
+        return
     }
     console.log('Server: ' + data)
 })
@@ -37,6 +40,8 @@ client.on('data', function (data) {
 // client.on('close', function () {
 //     console.log('Connection closed')
 // })
+
+rl.on("line", (l) => client.write(l))
 
 client.on("on", (data) => {
     console.log("dataasdasdasdasdasdasdasdasd: " + data)

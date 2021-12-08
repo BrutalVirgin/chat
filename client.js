@@ -23,7 +23,6 @@ client.connect(port, host, function () {
 
 client.on('data', function (data) {
     if (String(data) === "nickname") {
-        console.log("GONDURAS")
         rl.question("what is your nickname?", (answer) => {
             const msg = `AUTHORIZE#${answer}`
             client.write(msg)
@@ -44,5 +43,5 @@ client.on('data', function (data) {
 rl.on("line", (l) => client.write(l))
 
 client.on("on", (data) => {
-    console.log("dataasdasdasdasdasdasdasdasd: " + data)
+    console.log("connected: " + data)
 })

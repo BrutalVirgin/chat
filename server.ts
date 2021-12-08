@@ -1,9 +1,8 @@
 //import EventEmitter from 'events'
 import EventEmitter from 'events'
+import { chownSync } from 'fs'
 import net from 'net'
 import readLine from "readline"
-
-console.log("ZALUPA1")
 
 const port = 7070
 const host = '127.0.0.1'
@@ -34,13 +33,14 @@ class Connection extends EventEmitter {
         this.socket = socket
 
         this.socket.on("data", (msg) => {
-            const [type, data] = this.parseMessage(msg)
+            console.log(String(msg))
+            // const [type, data] = this.parseMessage(msg)
 
-            if (type === MessageType.AUTHORIZE) {
-                this.emit("authorize", data)
-            } else {
-                this.emit("unexpected", msg)
-            }
+            // if (type === MessageType.AUTHORIZE) {
+            //     this.emit("authorize", data)
+            // } else {
+            //     this.emit("unexpected", msg)
+            // }
         })
     }
 
@@ -88,7 +88,7 @@ class Server {
             console.log("authorize", d)
         })
         connection.on("unexpected", (d) => {
-            console.log("SHOTA TAM", d)
+            console.log("unexpected", d)
         })
 
         // connection.disconnect()

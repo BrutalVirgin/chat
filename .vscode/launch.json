@@ -24,23 +24,12 @@
             }
         },
         {
-            "type": "pwa-node",
-            "request": "launch",
-            "name": "Run TS File",
-            "program": "${file}",
-            "runtimeExecutable": "nodemon",
-        },
-        {
-            "name": "Launch index.ts",
             "type": "node",
             "request": "launch",
-            "runtimeArgs": [
-                "-r",
-                "ts-node/register"
-            ],
-            "args": [
-                "${workspaceFolder}/server.ts"
-            ]
-        }
+            "name": "Start bot",
+            "console": "integratedTerminal",
+            "program": "${workspaceFolder}/server1.ts",
+            "runtimeExecutable": "nodemon",
+        },
     ]
 }

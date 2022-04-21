@@ -43,21 +43,22 @@ async function start() {
                     users.push({ id, ws })
                     db.addUser(id, msg.nickName, msg.password)
                     ws.send(JSON.stringify("account created"))
-                }
-
-                if (msg.flag === "signIn") {
-                    const user = await db.getUserByName(msg.nickName)
-                    if (!user) {
-                        ws.send(JSON.stringify("user not found"))
-                    } else {
-                        user.password === msg.password ?
-                            ws.send(JSON.stringify("confirm")) :
-                            ws.send(JSON.stringify("incorrect password"))
-                    }
                 } else {
                     ws.send(JSON.stringify("already register"))
                 }
             }
+
+            if (msg.flag === "signIn") {
+                const user = await db.getUserByName(msg.nickName)
+                if (!user) {
+                    ws.send(JSON.stringify("user not found"))
+                } else {
+                    user.password === msg.password ?
+                        ws.send(JSON.stringify("confirm")) :
+                        ws.send(JSON.stringify("incorrect password"))
+                }
+            }
+
             else {
                 const id = uuid()
                 users.push({ id, ws })

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="messageForm">
+        Nickname <input type="text" name="nickname" id="nickname" />
+        Password <input type="text" name="password" id="password" />
+        <input type="submit" value="Send" />
+        <button name="button"><a href="main.html">Back</a></button>
+    </form>
+
+    <div id="register"></div>
+
+    <script type="module">
+
+        const ws = new WebSocket("ws://127.0.0.1:3000")
+
+        ws.onmessage = (message) => {
+            const messages = JSON.parse(message.data)
+
+            const messageEl = document.createElement("div")
+            messageEl.appendChild(document.createTextNode(`${messages}`))
+            register.appendChild(messageEl)
+
+        }
+
+        const send = ((event) => {
+            event.preventDefault()
+            const nickName = document.getElementById("nickname").value
+            const password = document.getElementById("password").value
+            ws.send(JSON.stringify({ flag: "newUser", nickName, password }))
+            return false
+        })
+
+        const formEl = document.getElementById("messageForm")
+        formEl.addEventListener("submit", send)
+
+    </script>
+</body>
+
+</html>

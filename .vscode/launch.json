@@ -28,7 +28,7 @@
             "request": "launch",
             "name": "Start bot",
             "console": "integratedTerminal",
-            "program": "${workspaceFolder}/server1.ts",
+            "program": "${workspaceFolder}/server.ts",
             "runtimeExecutable": "nodemon",
         },
     ]

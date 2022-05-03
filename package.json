@@ -2,9 +2,9 @@
   "name": "chat",
   "version": "1.0.0",
   "description": "",
-  "main": "server1.ts",
+  "main": "server.ts",
   "scripts": {
-    "start": "nodemon server1.ts",
+    "start": "nodemon server.ts",
     "client": "ts-node index.ts"
   },
   "repository": {

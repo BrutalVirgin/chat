@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server1.ts",
-
   "scripts": {
     "start": "nodemon server1.ts",
     "client": "ts-node index.ts"
@@ -20,7 +19,7 @@
   "homepage": "https://github.com/BrutalVirgin/chat#readme",
   "dependencies": {
     "@types/mongoose": "^5.11.97",
-    "express": "^4.17.3",
+    "express": "^4.18.1",
     "mongoose": "^6.3.0",
     "telnet": "^0.0.1",
     "telnet-client": "^1.4.10",

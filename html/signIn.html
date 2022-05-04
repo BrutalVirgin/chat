@@ -10,10 +10,12 @@
 
 <body>
     <form id="messageForm">
+        <h1>Sign In</h1>
         Nickname <input type="text" name="nickname" id="nickname" />
         Password <input type="text" name="password" id="password" />
         <input type="submit" value="Send" />
         <button name="button"><a href="main.html">Back</a></button>
+        <button id="button" name="test" hidden><a href="index.html">To chat</a></button>
     </form>
 
     <div id="register"></div>
@@ -21,6 +23,8 @@
 
 
     <script type="module">
+
+        let element = document.getElementById("button")
 
         const ws = new WebSocket("ws://127.0.0.1:3000")
 
@@ -52,6 +56,8 @@
             const nickName = document.getElementById("nickname").value
             const password = document.getElementById("password").value
             ws.send(JSON.stringify({ flag: "signIn", nickName, password }))
+
+            element.removeAttribute("hidden")
             return false
         })
 
